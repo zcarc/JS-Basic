@@ -8,6 +8,9 @@ var lines = [];
 var blanks = [];
 var turn = 'X';
 
+var result = document.createElement('div');
+
+
 
 var aync_callback = function(event){
     console.log('event.target: ', event.target);
@@ -58,9 +61,13 @@ var aync_callback = function(event){
         if( targetBlank - targetLine === 0 ||  
             Math.abs(targetBlank - targetLine) === 2){
 
-            if( blanks[0][0].textContent === turn &&
+            if((blanks[0][0].textContent === turn &&
                 blanks[1][1].textContent === turn && 
-                blanks[2][2].textContent === turn ) {
+                blanks[2][2].textContent === turn)  
+                ||
+               (blanks[0][2].textContent === turn &&
+                blanks[1][1].textContent === turn && 
+                blanks[2][0].textContent === turn)) {
                     console.log('대각선 검사');
                     allTrue = true;
                 }
@@ -72,6 +79,19 @@ var aync_callback = function(event){
         // 아니라면 turn을 바꿈
         if(allTrue){
             console.log(turn, '의 승리입니다.');
+            result.textContent = turn + '의 승리입니다.';
+
+            turn = 'X';
+
+            // function의 element는 해당 배열에 있는 값
+            // blanks의 element는 1차원 배열 3개인 td를 감싸고 있는 각 배열들
+            // element.forEach에서의 element는 배열이 아닌 td의 각 엘리먼트들을 반복
+            blanks.forEach(function (element){
+                element.forEach(function (element){
+                    element.textContent = '';
+                });
+            });
+
         } else {
 
             if(turn === 'X'){
@@ -109,6 +129,7 @@ for(var i = 1; i <= 3; i+= 1) {
 }
 
 document.body.appendChild(table);
+document.body.append(result);
 
 console.log('blanks: ', blanks);
 console.log('lines: ', lines);
