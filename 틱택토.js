@@ -31,11 +31,58 @@ var aync_callback = function(event){
         console.log('빈칸 입니다.');
 
         blanks[targetLine][targetBlank].textContent = turn;
-        if(turn === 'X'){
-            turn = 'O';
-        } else {
-            turn = 'X';
+
+        var allTrue = false;
+
+        // 가로줄 검사
+        if( blanks[targetLine][0].textContent === turn &&
+            blanks[targetLine][1].textContent === turn &&
+            blanks[targetLine][2].textContent === turn ) {
+
+            console.log('가로줄 검사');
+            allTrue = true;
         }
+
+        // 세로줄 검사
+        if( blanks[0][targetBlank].textContent === turn &&
+            blanks[1][targetBlank].textContent === turn &&
+            blanks[2][targetBlank].textContent === turn ) {
+
+
+            
+            console.log('세로줄 검사');
+            allTrue = true;
+        }
+
+        // 대각선 검사
+        if( targetBlank - targetLine === 0 ||  
+            Math.abs(targetBlank - targetLine) === 2){
+
+            if( blanks[0][0].textContent === turn &&
+                blanks[1][1].textContent === turn && 
+                blanks[2][2].textContent === turn ) {
+                    console.log('대각선 검사');
+                    allTrue = true;
+                }
+
+            
+        }
+
+        // 3칸이라면 승리하고
+        // 아니라면 turn을 바꿈
+        if(allTrue){
+            console.log(turn, '의 승리입니다.');
+        } else {
+
+            if(turn === 'X'){
+                turn = 'O';
+            } else {
+                turn = 'X';
+            }
+
+        }
+
+       
     }
 
     
