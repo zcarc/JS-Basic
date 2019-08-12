@@ -78,6 +78,9 @@ console.log('후보군: ', 후보군);
 
 var 셔플 = [];
 while(후보군.length > 0) {
+
+    //console.log('후보군.length: ', 후보군.length);
+
     // Array.splice() 함수는 배열로 반환된다.
     var 이동값 = 후보군.splice(Math.random() * 후보군.length, 1)[0];
     셔플.push(이동값);
@@ -128,7 +131,7 @@ console.log('당첨숫자들: ',
 
 // 정확하게 내림차순을 하고 싶다면 아래와 같이 한다.
 console.log('정확한 내림차순');
-console.log('당첨숫자들: ', 당첨숫자들.sort(function(p, c){return c - p}), ' 보너스: ', 보너스);
+console.log('당첨숫자들: ', 당첨숫자들.sort(function(p, c){return p - c}), ' 보너스: ', 보너스);
 
 
 // <내림차순 정렬>
@@ -149,3 +152,45 @@ console.log('당첨숫자들: ', 당첨숫자들.sort(function(p, c){return c - 
 // 원리는 0보다 크면 순서를 바꾸는 것이다.
 // 그리고 숫자도 정렬할 수 있지만, 문자도 정렬할 수 있다.
 // 문자에 숫자를 부여해서 서로 뺄 수 있게 할 수 있다.
+
+
+
+/*
+        6-4. JS로 HTML 태그 선택하기
+ */
+
+ var 결과창 = document.getElementById('결과창');
+
+ for(var i = 0; i < 당첨숫자들.length; i+= 1) {
+
+    setTimeout(function 비동기콜백함수() {
+
+        var 공 = document.createElement('div');
+        공.textContent = 당첨숫자들[i];
+        결과창.append(공);
+    }, 1000);
+
+    
+ }
+
+// class는 같은 이름을 여러개 사용할 수 있어서 배열로 가져와야한다.
+var 보너스칸 = document.getElementsByClassName('보너스')[0];
+
+var 보너스공 = document.createElement('div');
+보너스공.textContent = 보너스;
+보너스칸.append(보너스공);
+
+
+// 아래 코드는 클로저(closure) 문제라 반복문 안에 비동기를 사용하는 것은 
+// 클로저를 배운 후에 알아본다.
+// for(var i = 0; i < 당첨숫자들.length; i+= 1) {
+
+//     setTimeout(function 비동기콜백함수() {
+
+//         var 공 = document.createElement('div');
+//         공.textContent = 당첨숫자들[i];
+//         결과창.append(공);
+//     }, 1000);
+
+    
+//  }

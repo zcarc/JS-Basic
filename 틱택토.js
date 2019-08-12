@@ -11,6 +11,13 @@ var turn = 'X';
 var result = document.createElement('div');
 
 
+/*
+    5-5.
+    배열이나 객체는 데이터를 표현할 때 많이 쓰인다.
+
+*/
+
+
 
 var aync_callback = function(event){
     console.log('event.target: ', event.target);
