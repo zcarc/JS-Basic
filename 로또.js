@@ -177,10 +177,14 @@ console.log('lotteryNumbers: ', lotteryNumbers.sort(function(p, c){return p - c}
 
 
 /*
-        6-5. JS로 CSS 조작하기
+        6-5. JS로 CSS 조작하기 ~ 6-6. 로또추첨기 마무리 & querySelector
  */
 
-var LotteryNumbersDiv = document.getElementById('LotteryNumbersDiv');
+//var LotteryNumbersDiv = document.getElementById('LotteryNumbersDiv');
+
+// querySelectorAll도 있는데 이 함수는 여러 태그를 동시에 선택한다.
+var LotteryNumbersDiv = document.querySelector('#LotteryNumbersDiv');
+
 console.log('LotteryNumbersDiv: ', LotteryNumbersDiv);
 
  function PaintBalls(textNumber, printDiv) {
@@ -188,13 +192,35 @@ console.log('LotteryNumbersDiv: ', LotteryNumbersDiv);
     
     var createdDiv = document.createElement('div');
     createdDiv.textContent = textNumber;
-    createdDiv.style.display = 'inline-block';
+    createdDiv.style.display = 'table-cell';
     createdDiv.style.border = '1px solid black';
-    createdDiv.style.borderRadius = '10px';
+    createdDiv.style.borderRadius = '12.5px';
     createdDiv.style.width = '20px';
     createdDiv.style.height = '20px';
     createdDiv.style.textAlign = 'center';
     createdDiv.style.marginRight = '10px';
+    createdDiv.style.verticalAlign ='middle';
+    createdDiv.style.fontSize = '10px';
+    createdDiv.className = 'createdDiv' + textNumber;
+
+    // 아이디는 element에서 바로 ".id"로 접근가능하지만
+    // class는 ".class"로 접근을 못하고 ".className"으로 접근해야한다.
+
+    var bgColor = '';
+    if(textNumber <= 10) {
+        bgColor = 'red';
+    } else if(textNumber <= 20) {
+        bgColor = 'orange';
+    } else if(textNumber <= 30) {
+        bgColor = 'yellow';
+    } else if(textNumber <= 40) {
+        bgColor = 'blue';
+    } else {
+        bgColor = 'green';
+    }
+
+    createdDiv.style.backgroundColor = bgColor;
+
     printDiv.append(createdDiv);
  }
 setTimeout(function aynchronous_Callback() {
@@ -218,6 +244,12 @@ setTimeout(function aynchronous_Callback() {
 
 setTimeout(function aynchronous_Callback(){
     // class는 같은 이름을 여러개 사용할 수 있어서 배열로 가져와야한다.
-    var bonusNumberDiv = document.getElementsByClassName('BonusNumberDiv')[0];
+    //var bonusNumberDiv = document.getElementsByClassName('BonusNumberDiv')[0];
+
+    // querySelctor로 클래스를 가져올 경우에는 배열로 접근하지 않아도 된다.
+    var bonusNumberDiv = document.querySelector('.BonusNumberDiv');
     PaintBalls(bonusNumber, bonusNumberDiv);
 }, 7000);
+
+// 제로초는 하나로 다되기 때문에 qeurySelector를 사용하는 것을 추천한다.
+// getElementById와 querySelector의 차이는 HTML element와 Node List의 차이이다.
