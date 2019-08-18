@@ -1,0 +1,65 @@
+[33mcommit c82c5796ab00ef44118338c54aa7052439e2f046[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Sat Aug 17 19:13:37 2019 +0900
+
+    7-1. 가위바위보(이미지 스프라이트)
+
+[33mcommit 9ded4eaf623d0c093b7f500afa1c863e3e5b4125[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Tue Aug 13 05:27:27 2019 +0900
+
+    6-5. JS로 CSS조작하기
+
+[33mcommit 1eb269b14cf9a15ffb6c34bcb4bfef386c528794[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Tue Aug 13 04:17:01 2019 +0900
+
+    6-4 JS로 HTML 태그 선택하기
+
+[33mcommit 213769e167912b44f44a02c6b0d18ae9b6e097be[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Mon Aug 12 02:09:28 2019 +0900
+
+    6-2. 배열 map 메서드 ~ 6-3. 배열 slice & sort
+
+[33mcommit 6f59bb1b8f3855bcda09b366824d9fb69a79d74c[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Mon Aug 12 00:07:40 2019 +0900
+
+    6-1. 로또추첨기 Array & fill
+
+[33mcommit 95214b2ff497cf6ef74b934f850e1ec09d879c35[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Sun Aug 11 20:18:27 2019 +0900
+
+    5-5. forEach와 중첩 반복문
+
+[33mcommit 8e8650896b51334ba9d5e4f33d22abaab4ed8d85[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Sun Aug 11 19:12:23 2019 +0900
+
+    5-4. 틱택토 구현
+
+[33mcommit 82e1e59c6dca77f717c6b2b7706a17ab073d00a3[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Sat Aug 10 20:52:39 2019 +0900
+
+    5-3. e.target과 parentNode
+
+[33mcommit 017ec82607a369ed13533ad03280946bcf07d49d[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Thu Aug 8 02:45:16 2019 +0900
+
+    5-2 이차원 배열
+
+[33mcommit 8abe8dedc3f87b1fcc066446edbf3431aedfffd6[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Mon Aug 5 08:58:16 2019 +0900
+
+    5-1 틱택토 순서도& 화면
+
+[33mcommit dc24337ed9c9cf786fe40e2bea6984224c1825d5[m
+Author: wrkbr <zcarc1@gmail.com>
+Date:   Mon Aug 5 06:15:25 2019 +0900
+
+    From 1-1 to 4-6
