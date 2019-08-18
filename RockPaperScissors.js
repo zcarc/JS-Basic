@@ -70,28 +70,90 @@ function selectedValue (imageCoordinate) {
 
 
 
-setInterval(function (){
+var interval;
 
-    if(imageCoordinate === rockPaperScissors.rock){
-        imageCoordinate = rockPaperScissors.scissors;
+function createInterval(){
 
-    } else if(imageCoordinate === rockPaperScissors.scissors){
-        imageCoordinate = rockPaperScissors.paper;
+    interval = setInterval(function (){
 
-    } else {
-        imageCoordinate = rockPaperScissors.rock;
-    }
-    //console.log('imageCoordinate: ', imageCoordinate);
-    document.querySelector('#computer').style.background = 'url(https://en.pimg.jp/023/182/267/1/23182267.jpg)' + imageCoordinate + ' 0';
-}, 300);
+        if(imageCoordinate === rockPaperScissors.rock){
+            imageCoordinate = rockPaperScissors.scissors;
+    
+        } else if(imageCoordinate === rockPaperScissors.scissors){
+            imageCoordinate = rockPaperScissors.paper;
+    
+        } else {
+            imageCoordinate = rockPaperScissors.rock;
+        }
+        //console.log('imageCoordinate: ', imageCoordinate);
+        document.querySelector('#computer').style.background = 'url(https://en.pimg.jp/023/182/267/1/23182267.jpg)' + imageCoordinate + ' 0';
+    }, 300);
+
+}
+
+createInterval();
 
 
 // querySelectorAll() 함수는 forEach() 함수를 지원한다.
 document.querySelectorAll('.btn').forEach(function(btn){
 
     btn.addEventListener('click', function(){
+
+        // 이벤트가 클릭되었을 때 비동기 interval을 멈춤
+        clearInterval(interval);
+
+        // interval이 멈춘 상태로 유지되면 안되니까
+        // 1초 뒤에 다시 가위바위보가 실행되도록 설정
+        setTimeout(function(){
+            
+             createInterval();
+
+        }, 1000);
+
+
         var mySelection = this.textContent;
-        console.log(mySelection, selectedValue(imageCoordinate));
+
+        console.log('mySelection: ', mySelection);
+        console.log('selectedValue(imageCoordinate): ', selectedValue(imageCoordinate));
+        console.log('selectedValue(imageCoordinate)[0]: ', selectedValue(imageCoordinate)[0]);
+
+        if(mySelection === 'rock'){
+
+            if(selectedValue(imageCoordinate)[0] === 'rock') {
+                console.log('비겼습니다.');
+
+            } else if(selectedValue(imageCoordinate)[0] === 'paper') {
+                console.log('졌습니다.');
+
+            } else if(selectedValue(imageCoordinate)[0] === 'scissors') {
+                console.log('이겼습니다.');
+            }
+
+        } else if( mySelection === 'paper' ) {
+
+            if(selectedValue(imageCoordinate)[0] === 'rock') {
+                console.log('이겼습니다.');
+
+            } else if(selectedValue(imageCoordinate)[0] === 'paper') {
+                console.log('비겼습니다.');
+
+            } else if(selectedValue(imageCoordinate)[0] === 'scissors') {
+                console.log('졌습니다.');
+            }
+
+        } else if( mySelection === 'scissors' ) {
+
+            if(selectedValue(imageCoordinate)[0] === 'rock') {
+                console.log('졌습니다.');
+
+            } else if(selectedValue(imageCoordinate)[0] === 'paper') {
+                console.log('이겼습니다.');
+
+            } else if(selectedValue(imageCoordinate)[0] === 'scissors') {
+                console.log('비겼습니다.');
+            }
+
+        }
     });
 
 });
