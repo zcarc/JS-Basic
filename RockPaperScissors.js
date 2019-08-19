@@ -1,6 +1,6 @@
 
 
-var imageCoordinate = '0';
+var intervalCoordinate = '0';
 
 var rockPaperScissors = {
     rock : '0',
@@ -49,14 +49,14 @@ console.log('Object.entries():' , Object.entries(rockPaperScissors));
 // 반환받을 key이 이름이 rock, paper, scissors 이렇게 3가지의 경우가 있기 때문에
 // 해당아이디를 일일이 수정할 수 없어서 함수로 만든다.
 
-function selectedValue (imageCoordinate) {
+function generatedCoordinate (intervalCoordinate) {
 
     return Object.entries(rockPaperScissors).find(function (v){
 
         console.log('v: ', v);
 
         // 여기서 리턴되는 값은 해당 일치하는 Array 자체를 리턴한다.
-        // 예를 들어서 imageCoordinate에 '0'이 들어왔다면
+        // 예를 들어서 intervalCoordinate에 '0'이 들어왔다면
         // 반복문을 통해서 2차원 배열을 각각 확인해서
         // 여기서 v는 해당 어레이 자체이고
         // index 0은 rock, scissors, paper
@@ -64,7 +64,7 @@ function selectedValue (imageCoordinate) {
 
         // 예를 들어 파라미터의 값이 -142px 라면
         // 여기서는 1번째 인덱스에 해당하므로 두번째 배열이 리턴된다.
-        return v[1] === imageCoordinate;
+        return v[1] === intervalCoordinate;
     });
 }
 
@@ -76,22 +76,30 @@ function createInterval(){
 
     interval = setInterval(function (){
 
-        if(imageCoordinate === rockPaperScissors.rock){
-            imageCoordinate = rockPaperScissors.scissors;
+        if(intervalCoordinate === rockPaperScissors.rock){
+            intervalCoordinate = rockPaperScissors.scissors;
     
-        } else if(imageCoordinate === rockPaperScissors.scissors){
-            imageCoordinate = rockPaperScissors.paper;
+        } else if(intervalCoordinate === rockPaperScissors.scissors){
+            intervalCoordinate = rockPaperScissors.paper;
     
         } else {
-            imageCoordinate = rockPaperScissors.rock;
+            intervalCoordinate = rockPaperScissors.rock;
         }
-        //console.log('imageCoordinate: ', imageCoordinate);
-        document.querySelector('#computer').style.background = 'url(https://en.pimg.jp/023/182/267/1/23182267.jpg)' + imageCoordinate + ' 0';
+        //console.log('intervalCoordinate: ', intervalCoordinate);
+        document.querySelector('#computer').style.background = 'url(https://en.pimg.jp/023/182/267/1/23182267.jpg)' + intervalCoordinate + ' 0';
     }, 300);
 
 }
 
 createInterval();
+
+
+ var numberOfRockPaperScissors = {
+
+     rock: 1,
+     scissors: 0,
+     paper: -1,
+ };
 
 
 // querySelectorAll() 함수는 forEach() 함수를 지원한다.
@@ -102,7 +110,7 @@ document.querySelectorAll('.btn').forEach(function(btn){
         // 이벤트가 클릭되었을 때 비동기 interval을 멈춤
         clearInterval(interval);
 
-        // interval이 멈춘 상태로 유지되면 안되니까
+        // interval이 멈춘 상태로 유지되면 안되니까 
         // 1초 뒤에 다시 가위바위보가 실행되도록 설정
         setTimeout(function(){
             
@@ -113,51 +121,76 @@ document.querySelectorAll('.btn').forEach(function(btn){
 
         var mySelection = this.textContent;
 
-        console.log('mySelection: ', mySelection);
-        console.log('selectedValue(imageCoordinate): ', selectedValue(imageCoordinate));
-        console.log('selectedValue(imageCoordinate)[0]: ', selectedValue(imageCoordinate)[0]);
 
-        if(mySelection === 'rock'){
+        if( numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] === 0 ) {
 
-            if(selectedValue(imageCoordinate)[0] === 'rock') {
-                console.log('비겼습니다.');
+            console.log("비겼습니다.")
 
-            } else if(selectedValue(imageCoordinate)[0] === 'paper') {
-                console.log('졌습니다.');
+        } else if( 
+                   numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] === -1 ||
+                   numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] === 2) {
 
-            } else if(selectedValue(imageCoordinate)[0] === 'scissors') {
-                console.log('이겼습니다.');
-            }
-
-        } else if( mySelection === 'paper' ) {
-
-            if(selectedValue(imageCoordinate)[0] === 'rock') {
-                console.log('이겼습니다.');
-
-            } else if(selectedValue(imageCoordinate)[0] === 'paper') {
-                console.log('비겼습니다.');
-
-            } else if(selectedValue(imageCoordinate)[0] === 'scissors') {
-                console.log('졌습니다.');
-            }
-
-        } else if( mySelection === 'scissors' ) {
-
-            if(selectedValue(imageCoordinate)[0] === 'rock') {
-                console.log('졌습니다.');
-
-            } else if(selectedValue(imageCoordinate)[0] === 'paper') {
-                console.log('이겼습니다.');
-
-            } else if(selectedValue(imageCoordinate)[0] === 'scissors') {
-                console.log('비겼습니다.');
-            }
-
+            console.log("이겼습니다.")
+            
+        } else {
+            console.log("졌습니다.")
         }
+
+        console.log('mySelection: ', mySelection);
+        console.log('intervalCoordinate: ', intervalCoordinate);
+        console.log( 'numberOfRockPaperScissors[mySelection]: ', numberOfRockPaperScissors[mySelection] );
+        console.log('generatedCoordinate(intervalCoordinate)[0]: ', generatedCoordinate(intervalCoordinate)[0] );
+        console.log('numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]]: ', numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] );
+        console.log('numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]: ', numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] );
+
+        // console.log('mySelection: ', mySelection);
+        // console.log('generatedCoordinate(intervalCoordinate): ', generatedCoordinate(intervalCoordinate));
+        // console.log('generatedCoordinate(intervalCoordinate)[0]: ', generatedCoordinate(intervalCoordinate)[0]);
+
+        // if(mySelection === 'rock'){
+
+        //     if(generatedCoordinate(intervalCoordinate)[0] === 'rock') {
+        //         console.log('비겼습니다.');
+
+        //     } else if(generatedCoordinate(intervalCoordinate)[0] === 'paper') {
+        //         console.log('졌습니다.');
+
+        //     } else if(generatedCoordinate(intervalCoordinate)[0] === 'scissors') {
+        //         console.log('이겼습니다.');
+        //     }
+
+        // } else if( mySelection === 'paper' ) {
+
+        //     if(generatedCoordinate(intervalCoordinate)[0] === 'rock') {
+        //         console.log('이겼습니다.');
+
+        //     } else if(generatedCoordinate(intervalCoordinate)[0] === 'paper') {
+        //         console.log('비겼습니다.');
+
+        //     } else if(generatedCoordinate(intervalCoordinate)[0] === 'scissors') {
+        //         console.log('졌습니다.');
+        //     }
+
+        // } else if( mySelection === 'scissors' ) {
+
+        //     if(generatedCoordinate(intervalCoordinate)[0] === 'rock') {
+        //         console.log('졌습니다.');
+
+        //     } else if(generatedCoordinate(intervalCoordinate)[0] === 'paper') {
+        //         console.log('이겼습니다.');
+
+        //     } else if(generatedCoordinate(intervalCoordinate)[0] === 'scissors') {
+        //         console.log('비겼습니다.');
+        //     }
+
+        // }
     });
 
 });
 
 
- 
-
+// 가위: 1, 바위: 0, 보: -1
+// 나/컴퓨터   가위  바위    보
+//       가위  1 1   1 0   1 -1
+//       바위  0 1   0 0   0 -1
+//         보 -1 1  -1 0  -1 -1
