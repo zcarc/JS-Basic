@@ -49,14 +49,14 @@ console.log('Object.entries():' , Object.entries(rockPaperScissors));
 // 반환받을 key이 이름이 rock, paper, scissors 이렇게 3가지의 경우가 있기 때문에
 // 해당아이디를 일일이 수정할 수 없어서 함수로 만든다.
 
-function generatedCoordinate (intervalCoordinate) {
+function generatedCoordinate (coordinate) {
 
     return Object.entries(rockPaperScissors).find(function (v){
 
         console.log('v: ', v);
 
         // 여기서 리턴되는 값은 해당 일치하는 Array 자체를 리턴한다.
-        // 예를 들어서 intervalCoordinate에 '0'이 들어왔다면
+        // 예를 들어서 coordinate에 '0'이 들어왔다면
         // 반복문을 통해서 2차원 배열을 각각 확인해서
         // 여기서 v는 해당 어레이 자체이고
         // index 0은 rock, scissors, paper
@@ -64,7 +64,7 @@ function generatedCoordinate (intervalCoordinate) {
 
         // 예를 들어 파라미터의 값이 -142px 라면
         // 여기서는 1번째 인덱스에 해당하므로 두번째 배열이 리턴된다.
-        return v[1] === intervalCoordinate;
+        return v[1] === coordinate;
     });
 }
 
@@ -96,8 +96,9 @@ createInterval();
 
  var numberOfRockPaperScissors = {
 
-     rock: 1,
-     scissors: 0,
+     // 강좌 7.5 에서 rock과 scissors의 숫자를 바꿔 적어서 결과가 이상했었다.
+     rock: 0,
+     scissors: 1,
      paper: -1,
  };
 
@@ -121,27 +122,33 @@ document.querySelectorAll('.btn').forEach(function(btn){
 
         var mySelection = this.textContent;
 
+        var myNumber = numberOfRockPaperScissors[mySelection];
+        var computerNumber = numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]];
 
-        if( numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] === 0 ) {
+
+        if( myNumber - computerNumber === 0 ) {
 
             console.log("비겼습니다.")
 
-        } else if( 
-                   numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] === -1 ||
-                   numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] === 2) {
+        // } else if( myNumber -computerNumber === -1 ||
+        //            myNumber -computerNumber === 2 ) {
+        
+          // Array.includes() 함수를 사용하면 배열에 있는 값이 함수의 인자에 포함되어 있다면 includes() 함수는 true를 리턴한다.
+          // myNumber - computerNumber = -1 or 2 일 경우 true
+        } else if( [-1, 2].includes( myNumber - computerNumber ) ) {
 
             console.log("이겼습니다.")
             
-        } else {
+        } else { 
             console.log("졌습니다.")
         }
 
         console.log('mySelection: ', mySelection);
         console.log('intervalCoordinate: ', intervalCoordinate);
-        console.log( 'numberOfRockPaperScissors[mySelection]: ', numberOfRockPaperScissors[mySelection] );
-        console.log('generatedCoordinate(intervalCoordinate)[0]: ', generatedCoordinate(intervalCoordinate)[0] );
-        console.log('numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]]: ', numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] );
-        console.log('numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]: ', numberOfRockPaperScissors[mySelection] - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]] );
+        console.log( 'myNumber: ', myNumber );
+        // console.log('generatedCoordinate(intervalCoordinate)[0]: ', generatedCoordinate(intervalCoordinate)[0] );
+        // console.log('numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]]: ',computerNumber );
+        // console.log('myNumber - numberOfRockPaperScissors[generatedCoordinate(intervalCoordinate)[0]: ', myNumber - computerNumber );
 
         // console.log('mySelection: ', mySelection);
         // console.log('generatedCoordinate(intervalCoordinate): ', generatedCoordinate(intervalCoordinate));
